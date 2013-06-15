@@ -13,5 +13,8 @@
   "author": "t93",
   "license": "BSD",
   "readmeFilename": "README.md",
-  "gitHead": "dab80f650bb14c5fb2c2fe3c095537c8ccefd2eb"
+  "gitHead": "dab80f650bb14c5fb2c2fe3c095537c8ccefd2eb",
+  "dependencies": {
+    "spooky": "~0.2.2"
+  }
 }
