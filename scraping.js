@@ -27,6 +27,27 @@ scrape = function(err) {
         }
     });
 
+    spooky.on('load.finished', (function() {
+        var prevUrl = null,
+            captureDir = './capture/' + server + '_' + Date.now() + '/',
+            count = 0;
+
+        return function() {
+            var url = this.getCurrentUrl();
+
+            if (url === prevUrl) {
+                return;
+            }
+            prevUrl = url;
+            this.wait(500, function() {
+                var pathname = this.evaluate(function() {
+                    return document.location.pathname.replace(/\//g, '_');
+                });
+                this.capture(captureDir + (++count) + pathname + '.png');
+            });
+        };
+    }));
+
     spooky.start('http://t93.herokuapp.com');
     spooky.thenEvaluate(function() {
         console.log('Hello, from', document.title);
